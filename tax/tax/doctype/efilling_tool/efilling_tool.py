@@ -223,7 +223,7 @@ class EFillingTool(Document):
 					REPLACE(REPLACE(REPLACE(cus.tax_id, '.', ''),'-',' '),' ',''),
 					cus.`nomor_awalan_pajak`
 					from `tabSales Invoice` pm
-					JOIN `tabCustomer` cus ON cus.customer_name=pm.customer
+					left JOIN `tabCustomer` cus ON cus.customer_name=pm.customer
 					where pm.`docstatus` = 1 and pm.is_return != 1 AND pm.`posting_date`  between "{0}" and "{1}" """.format(self.date_from,self.date_to),as_list=1)
 
 				if data_pajak_keluaran :
@@ -334,7 +334,7 @@ class EFillingTool(Document):
 					REPLACE(REPLACE(cus.nama_pajak, '<br', ' '),'-',' ')
 
 					from `tabSales Invoice` pm
-					JOIN `tabCustomer` cus ON cus.customer_name=pm.customer
+					left JOIN `tabCustomer` cus ON cus.customer_name=pm.customer
 					where pm.`docstatus` = 1 and pm.is_return = 1 AND pm.`posting_date`  between "{0}" and "{1}" """.format(self.date_from,self.date_to),as_list=1)
 
 				if data_retur_keluaran :
